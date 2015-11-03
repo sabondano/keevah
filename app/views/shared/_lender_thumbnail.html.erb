@@ -1,4 +1,5 @@
 <div class="container">
+  <%= will_paginate %>
   <div class="row">
     <% @loan_requests.each do |loan_request| %>
       <div class="col-sm-6 col-md-4 col-lg-4 loan-request">
@@ -24,4 +25,5 @@
     </div>
   <% end %>
   </div>
+  <%= will_paginate %>
 </div>
