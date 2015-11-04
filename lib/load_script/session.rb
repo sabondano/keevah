@@ -46,7 +46,7 @@ module LoadScript
     end
 
     def actions
-      [:browse_loan_requests, :sign_up_as_lender]
+      [:browse_loan_requests, :sign_up_as_lender, :sign_up_as_borrower]
     end
 
     def log_in(email="demo+horace@jumpstartlab.com", pw="password")
@@ -83,6 +83,19 @@ module LoadScript
       session.find("#sign-up-dropdown").click
       session.find("#sign-up-as-lender").click
       session.within("#lenderSignUpModal") do
+        session.fill_in("user_name", with: name)
+        session.fill_in("user_email", with: new_user_email(name))
+        session.fill_in("user_password", with: "password")
+        session.fill_in("user_password_confirmation", with: "password")
+        session.click_link_or_button "Create Account"
+      end
+    end
+
+    def sign_up_as_borrower(name = new_user_name)
+      log_out
+      session.find("#sign-up-dropdown").click
+      session.find("#sign-up-as-borrower").click
+      session.within("#borrowerSignUpModal") do
         session.fill_in("user_name", with: name)
         session.fill_in("user_email", with: new_user_email(name))
         session.fill_in("user_password", with: "password")
