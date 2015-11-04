@@ -94,5 +94,10 @@ module LoadScript
     def categories
       ["Agriculture", "Education", "Community"]
     end
+
+    def browses_categories
+      session.visit "#{host}/categories"
+      session.all(".category").sample.click
+    end
   end
 end

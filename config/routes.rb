@@ -8,6 +8,8 @@ Rails.application.routes.draw do
 
   resources :payment, only: [:update]
 
+  resources :categories, only: [:index, :show]
+
   resources :loan_requests
 
   get "/cart", to: "cart#index"
