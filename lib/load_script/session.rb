@@ -126,7 +126,6 @@ module LoadScript
         session.select(categories.sample, from: "loan_request_category")
         session.fill_in("loan_request_amount", with: rand(10_000))
         session.click_link_or_button "Submit"
-        log_out
       end
     end
 
