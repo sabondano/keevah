@@ -49,16 +49,17 @@ module LoadScript
       [:browse_loan_requests,
        :sign_up_as_lender,
        :sign_up_as_borrower,
-       :new_borrower_creates_loan_request]
+       :new_borrower_creates_loan_request,
+       :lender_makes_loan]
     end
 
     def log_in(email="demo+horace@jumpstartlab.com", pw="password")
       log_out
       session.visit host
-      session.click_link("Log In")
-      session.fill_in("email_address", with: email)
-      session.fill_in("password", with: pw)
-      session.click_link_or_button("Login")
+      session.click_link("Login")
+      session.fill_in("session_email", with: email)
+      session.fill_in("session_password", with: pw)
+      session.click_link_or_button("Log In")
     end
 
     def browse_loan_requests
@@ -135,7 +136,6 @@ module LoadScript
       "#{Faker::Lorem.sentence}"
     end
 
-
     def categories
       ["Agriculture", "Education", "Community"]
     end
@@ -143,6 +143,15 @@ module LoadScript
     def browses_categories
       session.visit "#{host}/categories"
       session.all(".category").sample.click
+    end
+
+    def lender_makes_loan
+      log_in
+      session.visit "#{host}/browse"
+      session.all(".lr-about").sample.click
+      session.find(".btn-contribute").click
+      session.visit "#{host}/cart"     
+      session.find(".cart-button").click
     end
   end
 end
