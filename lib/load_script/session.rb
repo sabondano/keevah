@@ -46,7 +46,10 @@ module LoadScript
     end
 
     def actions
-      [:browse_loan_requests, :sign_up_as_lender, :sign_up_as_borrower]
+      [:browse_loan_requests,
+       :sign_up_as_lender,
+       :sign_up_as_borrower,
+       :new_borrower_creates_loan_request]
     end
 
     def log_in(email="demo+horace@jumpstartlab.com", pw="password")
@@ -103,6 +106,35 @@ module LoadScript
         session.click_link_or_button "Create Account"
       end
     end
+
+    def new_borrower_creates_loan_request
+      sign_up_as_borrower
+      session.click_link_or_button "Create Loan Request"
+      session.within("#loanRequestModal") do
+        session.fill_in("loan_request_title",
+                        with: new_loan_request_name)
+        session.fill_in("loan_request_description",
+                        with: new_loan_request_description)
+        session.fill_in("loan_request_image_url",
+                        with: "fakeimageurl")
+        session.fill_in("loan_request_requested_by_date",
+                        with: Time.now.strftime("%m/%d/%Y"))
+        session.fill_in("loan_request_repayment_begin_date",
+                        with: 10.days.from_now.strftime("%m/%d/%Y"))
+        session.select(categories.sample, from: "loan_request_category")
+        session.fill_in("loan_request_amount", with: rand(10_000))
+        session.click_link_or_button "Submit"
+      end
+    end
+
+    def new_loan_request_name
+      "#{Faker::Commerce.product_name} #{Time.now.to_i}"
+    end
+
+    def new_loan_request_description
+      "#{Faker::Lorem.sentence}"
+    end
+
 
     def categories
       ["Agriculture", "Education", "Community"]
