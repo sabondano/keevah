@@ -1,9 +1,13 @@
-<div class="page-header">
-  <h1>Categories</h1>
-</div>
+<div class="container">
+  <div class="page-header">
+    <h1>Categories</h1>
+  </div>
 
-<% @categories.each do |category| %>
-  <h4><%= category.title %></h4>
-  <p><%= category.description %></p>
-  <p><%= link_to "View Loan Requests", category_path(category), class: "category" %></p>
-<% end %>
+  <% @categories.each do |category| %>
+    <div class="col-sm-6 col-md-4 col-lg-4">
+      <h4><%= category.title %></h4>
+      <p><%= category.description %></p>
+      <p><%= link_to "View Loan Requests", category_path(category), class: "category" %></p>
+    </div>
+  <% end %>
+</div>
