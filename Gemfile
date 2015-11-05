@@ -29,6 +29,7 @@ gem "bootstrap-will_paginate"
 
 gem "pry-rails"
 gem "capybara"
+gem "poltergeist"
 
 group :development, :test do
   gem "awesome_print"
@@ -36,7 +37,6 @@ group :development, :test do
   gem "rspec-rails"
   gem "launchy"
   gem "database_cleaner"
-  gem "poltergeist"
 end
 
 group :development do
