@@ -26,14 +26,14 @@ gem "populator"
 gem "newrelic_rpm"
 gem "will_paginate"
 gem "bootstrap-will_paginate"
+
 gem "pry-rails"
+gem "capybara"
 
 group :development, :test do
-  gem "pry-rails"
   gem "awesome_print"
   gem "web-console", "~> 2.0"
   gem "rspec-rails"
-  gem "capybara"
   gem "launchy"
   gem "database_cleaner"
   gem "poltergeist"
