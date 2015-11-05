@@ -147,12 +147,16 @@ module LoadScript
     end
 
     def lender_makes_loan
-      log_in
-      session.visit "#{host}/browse"
-      session.all(".lr-about").sample.click
-      session.find(".btn-contribute").click
-      session.visit "#{host}/cart"     
-      session.find(".cart-button").click
+      begin
+        log_in
+        session.visit "#{host}/browse"
+        session.all(".lr-about").sample.click
+        session.find(".btn-contribute").click
+        session.visit "#{host}/cart"     
+        session.find(".cart-button").click
+      rescue
+        retry while true
+      end
     end
   end
 end
