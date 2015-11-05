@@ -50,7 +50,8 @@ module LoadScript
        :sign_up_as_lender,
        :sign_up_as_borrower,
        :new_borrower_creates_loan_request,
-       :lender_makes_loan]
+       :lender_makes_loan,
+       :browses_categories]
     end
 
     def log_in(email="demo+horace@jumpstartlab.com", pw="password")
@@ -125,6 +126,7 @@ module LoadScript
         session.select(categories.sample, from: "loan_request_category")
         session.fill_in("loan_request_amount", with: rand(10_000))
         session.click_link_or_button "Submit"
+        log_out
       end
     end
 
