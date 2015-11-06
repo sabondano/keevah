@@ -1,3 +1,4 @@
+<% cache @category do %>
 <div class="page-header">
   <h1><%= @category.title %> Loan Requests</h1>
 </div>
@@ -9,3 +10,4 @@
     <%= will_paginate @loan_requests %>
   </div>
 </div>
+<% end %>
