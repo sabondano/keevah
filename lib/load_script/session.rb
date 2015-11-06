@@ -39,9 +39,11 @@ module LoadScript
 
     def benchmarked(name)
       logger.info "Running action #{name}"
+      puts "Running action #{name}"
       start = Time.now
       val = yield
       logger.info "Completed #{name} in #{Time.now - start} seconds"
+      puts "Completed #{name} in #{Time.now - start} seconds"
       val
     end
 
