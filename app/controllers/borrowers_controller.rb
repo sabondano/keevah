@@ -18,7 +18,8 @@ class BorrowersController < ApplicationController
   end
 
   def show
-    @loan_requests = LoanRequest.where(user_id: params[:id])
+    @loan_requests = LoanRequest.select(:title, :description, :image_url)
+      .where(user_id: params[:id])
   end
 
   private
