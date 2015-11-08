@@ -150,7 +150,7 @@ module LoadScript
 
     def lender_makes_loan
       begin
-        log_in
+        sign_up_as_lender
         session.visit "#{host}/browse"
         session.all(".lr-about").sample.click
         session.find(".btn-contribute").click
