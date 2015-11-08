@@ -13,7 +13,7 @@ class Cart
   def cart_items_and_amount
     ids = cart_items.keys
     amounts = cart_items.values
-    loan_requests = LoanRequest.find(ids)
+    loan_requests = LoanRequest.includes(:user).find(ids)
     loan_requests.zip(amounts).to_h
   end
 
