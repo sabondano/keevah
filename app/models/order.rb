@@ -22,9 +22,10 @@ class Order < ActiveRecord::Base
   end
 
   def cart_item_and_quantity
-    loan_requests = Hash.new
-    cart_items.select { |loan_id, amount| loan_requests[LoanRequest.find(loan_id)] = amount }
-    loan_requests
+    ids = cart_items.keys
+    amounts = cart_items.values
+    loan_requests = LoanRequest.find(ids)
+    loan_requests.zip(amounts).to_h
   end
 
   def find_loan_requests
